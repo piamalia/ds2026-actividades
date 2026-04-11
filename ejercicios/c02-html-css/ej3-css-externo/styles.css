@@ -1,0 +1,40 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffeef2;
+    margin: 20px;
+}
+
+
+h1 {
+    color: #d63384;
+    text-align: center;
+}
+
+
+h2 {
+    color: #c2185b;
+}
+
+
+p {
+    color: #444;
+}
+
+
+.contenedor {
+    background-color: white;
+    padding: 20px;
+    margin: 20px auto;
+}
+
+
+.link {
+    color: #d63384;
+}
+
+.foto {
+    width: 800px;
+    max-width: 100%;
+    border-radius: 12px;
+    border: 3px solid #d63384;
+}
