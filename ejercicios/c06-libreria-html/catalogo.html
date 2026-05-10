@@ -2,28 +2,26 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Librería</title>
+  <title>Catálogo</title>
 
-  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+<nav class="navbar navbar-dark bg-dark">
   <div class="container">
     <a class="navbar-brand" href="index.html">📚 Librería</a>
-
-    <div>
-      <a class="nav-link text-white" href="index.html">Inicio</a>
-      <a class="nav-link text-white" href="catalogo.html">Catálogo</a>
-      <a class="nav-link text-white" href="contacto.html">Contacto</a>
-    </div>
   </div>
-</nav> 
+</nav>
 
-  <h1>Mi Librería</h1>
-  <button class="btn btn-primary">¡Hola Bootstrap!</button>
+<div class="container mt-4">
+  <input id="buscador" class="form-control" placeholder="Buscar libro">
+  <button onclick="buscar()" class="btn btn-primary mt-2">Buscar</button>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  
+  <div id="resultados" class="row mt-4"></div>
+</div>
+
+<script src="js/data.js"></script>
 </body>
 </html>

@@ -1,6 +1,11 @@
 async function buscar() {
   const texto = document.getElementById("buscador").value;
 
+  if (!texto) {
+    alert("Escribí algo");
+    return;
+  }
+
   const res = await fetch(`https://openlibrary.org/search.json?q=${texto}`);
   const data = await res.json();
 
@@ -9,7 +14,7 @@ async function buscar() {
 
   data.docs.slice(0, 10).forEach(libro => {
     contenedor.innerHTML += `
-      <div class="col-md-4">
+      <div class="col-md-4 mb-3">
         <div class="card">
           <div class="card-body">
             <h5>${libro.title}</h5>
