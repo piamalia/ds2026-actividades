@@ -1,0 +1,37 @@
+import { obtenerToken } from "./sesion";
+
+const BASE = import.meta.env.VITE_API_URL;
+
+export class ApiError extends Error {
+  status: number;
+  constructor(status: number, message: string) {
+    super(message);
+    this.status = status;
+  }
+}
+
+export async function apiFetch<T>(ruta: string, opciones: RequestInit = {}): Promise<T> {
+  const token = obtenerToken();
+
+  const res = await fetch(`${BASE}${ruta}`, {
+    ...opciones,
+    headers: {
+      "Content-Type": "application/json",
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      ...opciones.headers,
+    },
+  });
+
+  // Si la API responde 401 y teníamos token, emitimos el evento de expiración
+  if (res.status === 401 && token) {
+    window.dispatchEvent(new Event("sesion-expirada"));
+  }
+
+  const cuerpo = await res.json().catch(() => null);
+
+  if (!res.ok) {
+    throw new ApiError(res.status, cuerpo?.error ?? `Error ${res.status}`);
+  }
+
+  return cuerpo as T;
+}
