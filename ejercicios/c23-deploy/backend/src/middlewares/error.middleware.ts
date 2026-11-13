@@ -1,0 +1,27 @@
+import { Request, Response, NextFunction } from "express";
+import { ZodError } from "zod";
+import { Prisma } from "../generated/prisma";
+
+export function errorHandler(err: any, _req: Request, res: Response, _next: NextFunction) {
+  if (err instanceof ZodError) {
+    return res.status(400).json({
+      error: "Datos inválidos",
+      detalles: err.issues.map(i => ({ campo: i.path.join("."), mensaje: i.message }))
+    });
+  }
+
+  if (err instanceof Prisma.PrismaClientKnownRequestError) {
+    if (err.code === "P2002") {
+      return res.status(409).json({ error: "Ya existe un registro con ese valor único" });
+    }
+    if (err.code === "P2025") {
+      return res.status(404).json({ error: "El registro solicitado no existe" });
+    }
+    if (err.code === "P2003") {
+      return res.status(409).json({ error: "Violación de integridad: El ID de la relación no existe" });
+    }
+  }
+
+  console.error("Error no controlado:", err);
+  return res.status(500).json({ error: "Error interno del servidor" });
+}

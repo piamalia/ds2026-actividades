@@ -1,0 +1,97 @@
+@baseUrl = http://localhost:3000
+
+### ==========================================
+### PRUEBAS DE LA ENTIDAD: LIBROS
+### ==========================================
+
+### 1. Obtener todos los libros (GET)
+GET {{baseUrl}}/api/libros
+
+### 2. Obtener libros disponibles (Filtro por Query)
+GET {{baseUrl}}/api/libros?disponible=true
+
+### 3. Obtener un libro existente por ID
+GET {{baseUrl}}/api/libros/1
+
+### 4. Caso de error: Buscar libro que no existe (GET 404)
+GET {{baseUrl}}/api/libros/999
+
+### 5. Crear un nuevo libro (POST 201)
+POST {{baseUrl}}/api/libros
+Content-Type: application/json
+
+{
+  "titulo": "Rayuela",
+  "autor": "Julio Cortázar",
+  "precio": 7000,
+  "imagen": "https://example.com/rayuela.jpg",
+  "disponible": true
+}
+
+### 6. Editar un libro existente (PUT 200)
+PUT {{baseUrl}}/api/libros/1
+Content-Type: application/json
+
+{
+  "titulo": "El principito (Edición Especial)",
+  "autor": "Antoine de Saint-Exupéry",
+  "precio": 4800,
+  "imagen": "https://example.com/principito_nuevo.jpg",
+  "disponible": true
+}
+
+### 7. Caso de error: Editar un libro inexistente (PUT 404)
+PUT {{baseUrl}}/api/libros/999
+Content-Type: application/json
+
+{
+  "titulo": "Inexistente",
+  "autor": "Alguien",
+  "precio": 1000,
+  "imagen": "",
+  "disponible": false
+}
+
+### 8. Eliminar un libro (DELETE 204)
+DELETE {{baseUrl}}/api/libros/2
+
+### 9. Caso de error: Eliminar un libro inexistente (DELETE 404)
+DELETE {{baseUrl}}/api/libros/2
+
+
+### ==========================================
+### PRUEBAS DE LA ENTIDAD: AUTORES
+### ==========================================
+
+### 10. Obtener todos los autores (GET)
+GET {{baseUrl}}/api/autores
+
+### 11. Obtener un autor por ID
+GET {{baseUrl}}/api/autores/1
+
+### 12. Caso de error: Buscar autor inexistente (GET 404)
+GET {{baseUrl}}/api/autores/999
+
+### 13. Crear un nuevo autor (POST 201)
+POST {{baseUrl}}/api/autores
+Content-Type: application/json
+
+{
+  "nombre": "Adolfo Bioy Casares",
+  "nacionalidad": "Argentina"
+}
+
+### 14. Editar un autor existente (PUT 200)
+PUT {{baseUrl}}/api/autores/1
+Content-Type: application/json
+
+{
+  "nombre": "Antoine de Saint-Exupéry",
+  "nacionalidad": "Francesa-Argentina"
+}
+
+### 15. Eliminar un autor (DELETE 204)
+DELETE {{baseUrl}}/api/autores/3
+
+### 16. Caso de error: Eliminar autor inexistente (DELETE 404)
+DELETE {{baseUrl}}/api/autores/3
