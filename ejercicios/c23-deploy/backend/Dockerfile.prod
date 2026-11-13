@@ -5,6 +5,11 @@ COPY package*.json ./
 RUN npm ci
 COPY . .
 RUN npx prisma generate && npm run build
+RUN if [ -d "src/generated/prisma" ]; then \
+      echo "module.exports = require('./index.js');" > src/generated/prisma/client.js; \
+      mkdir -p src/generated/prisma/client; \
+      echo "module.exports = require('../index.js');" > src/generated/prisma/client/index.js; \
+    fi
 
 # Etapa 2: runtime
 FROM node:22-alpine
