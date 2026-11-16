@@ -9,6 +9,8 @@ import { Login } from "./pages/Login";
 import { LibroNuevo } from "./pages/LibroNuevo";
 import { SinPermiso } from "./pages/SinPermiso";
 import { PrivateRoute } from "./components/PrivateRoute";
+import "./index.css";
+import "./App.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
