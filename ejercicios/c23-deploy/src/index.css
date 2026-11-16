@@ -1,38 +1,44 @@
-/* src/index.css */
-:root {
-  
-  --primary: #4f46e5;          
-  --primary-hover: #4338ca;
-  --bg-main: #f8fafc;          
-  --bg-card: #ffffff;          
-  --text-main: #0f172a;        
-  --text-muted: #64748b;       
-  --border-color: #e2e8f0;     
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap");
 
-  
+:root {
+  --primary: #6366f1;
+  --primary-dark: #4f46e5;
+  --accent: #f59e0b;
+  --ink: #0f172a;
+  --ink-soft: #475569;
+  --muted: #94a3b8;
+  --bg: #f1f5f9;
+  --surface: #ffffff;
+  --border: #e2e8f0;
   --success-bg: #dcfce7;
   --success-text: #15803d;
-  --danger-bg: #ffe4e6;
-  --danger-text: #be123c;
-
-  
-  --radius-sm: 6px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
-  --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-
-  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --danger-bg: #fee2e2;
+  --danger-text: #b91c1c;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 8px 20px -6px rgba(15, 23, 42, 0.12);
+  --shadow-lg: 0 20px 35px -10px rgba(79, 70, 229, 0.25);
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-title: "Playfair Display", Georgia, serif;
   color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  padding: 0;
-  background-color: var(--bg-main);
-  color: var(--text-main);
+  font-family: var(--font-body);
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 10% 0%, rgba(99, 102, 241, 0.08), transparent 40%),
+    radial-gradient(circle at 90% 20%, rgba(245, 158, 11, 0.07), transparent 40%),
+    var(--bg);
   min-height: 100vh;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -43,7 +49,17 @@ body {
 }
 
 h1, h2, h3, h4 {
-  color: var(--text-main);
-  font-weight: 700;
+  font-family: var(--font-title);
+  color: var(--ink);
   margin-top: 0;
+  line-height: 1.2;
+}
+
+a {
+  color: var(--primary-dark);
+}
+
+::selection {
+  background: var(--primary);
+  color: #fff;
 }

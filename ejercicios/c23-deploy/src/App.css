@@ -1,84 +1,374 @@
-/* src/App.css */
-
-/* --- BARRA SUPERIOR (HEADER / NAVBAR) --- */
-header, nav, [class*="navbar"], [class*="header"] {
-  background: #0f172a !important; /* Azul oscuro elegante */
-  color: #ffffff !important;
-  padding: 0.8rem 2rem !important;
-  display: flex !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+/* ===== NAVBAR ===== */
+header,
+nav,
+[class*="navbar"] {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 2rem;
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.25);
 }
 
-header a, nav a {
-  color: #f8fafc !important;
-  text-decoration: none !important;
-  font-weight: 600 !important;
-  margin-right: 1rem !important;
-  transition: opacity 0.2s !important;
+header a,
+nav a {
+  color: #e2e8f0;
+  text-decoration: none;
+  font-weight: 500;
+  margin-right: 1.2rem;
+  padding: 0.35rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
 }
 
-header a:hover, nav a:hover {
-  opacity: 0.8 !important;
+header a:hover,
+nav a:hover {
+  color: #fff;
+  border-bottom-color: var(--accent);
 }
 
-/* --- BOTÓN SALIR / ACCIONES --- */
-button, .btn {
-  border-radius: 8px !important;
-  font-weight: 600 !important;
-  padding: 0.5rem 1rem !important;
-  border: none !important;
-  cursor: pointer !important;
-  transition: transform 0.15s, background-color 0.2s !important;
+header a:first-child,
+nav a:first-child {
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #fff;
 }
 
-button:hover, .btn:hover {
-  transform: translateY(-1px) !important;
+/* El link "+ Nuevo libro" */
+header a[href*="nuevo"],
+nav a[href*="nuevo"] {
+  color: var(--accent);
+  font-weight: 700;
 }
 
-/* --- CONTENEDOR PRINCIPAL --- */
-main, .container, #root > div {
-  max-width: 1100px !important;
-  margin: 0 auto !important;
-  padding: 2rem 1.5rem !important;
+/* ===== CONTENIDO PRINCIPAL ===== */
+main,
+.container {
+  width: 100%;
+  max-width: 1150px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  flex-grow: 1;
 }
 
-/* --- TÍTULOS --- */
 h1 {
-  color: #0f172a !important;
-  font-size: 2.2rem !important;
-  font-weight: 800 !important;
-  margin-bottom: 0.5rem !important;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 0.6rem;
 }
 
 h2 {
-  color: #334155 !important;
-  font-size: 1.5rem !important;
-  margin-top: 2rem !important;
-  margin-bottom: 1rem !important;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  text-align: center;
+  margin: 2.5rem 0 1.5rem;
+  position: relative;
 }
 
-/* --- TARJETAS DE LIBROS --- */
-/* Aplica diseño moderno a los divs dentro de la grilla/sección principal */
-main div > div, .card, [class*="card"] {
-  background: #ffffff !important;
-  border: 1px solid #e2e8f0 !important;
-  border-radius: 14px !important;
-  padding: 1.25rem !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05) !important;
-  transition: all 0.25s ease !important;
+h2::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 4px;
+  margin: 0.7rem auto 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
 }
 
-main div > div:hover, .card:hover {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
-  border-color: #cbd5e1 !important;
+p {
+  color: var(--ink-soft);
 }
 
-/* Imágenes dentro de las tarjetas */
-img {
-  max-width: 100% !important;
-  border-radius: 10px !important;
-  object-fit: cover !important;
+/* ===== HERO / BIENVENIDA ===== */
+[class*="hero"],
+[class*="banner"],
+[class*="welcome"] {
+  padding: 3.5rem 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, #eef2ff 0%, #fef3c7 100%);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+}
+
+/* ===== GRILLA DE LIBROS ===== */
+.catalog-grid,
+[class*="grid"],
+[class*="list"],
+[class*="catalog"] {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.75rem;
+  align-items: stretch;
+}
+
+/* ===== TARJETAS ===== */
+.book-card,
+.card,
+[class*="card"] {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.book-card::before,
+.card::before,
+[class*="card"]::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.book-card:hover,
+.card:hover,
+[class*="card"]:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+  border-color: #c7d2fe;
+}
+
+.book-card:hover::before,
+.card:hover::before,
+[class*="card"]:hover::before {
+  opacity: 1;
+}
+
+.book-card img,
+.card img,
+[class*="card"] img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  border-radius: var(--radius-sm);
+  margin-bottom: 0.6rem;
+  background: #e2e8f0;
+}
+
+.book-card h3,
+.card h3,
+[class*="card"] h3,
+.book-title {
+  font-size: 1.2rem;
+  margin: 0.2rem 0;
+}
+
+.book-author {
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+
+.book-price,
+.price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+}
+
+/* ===== BADGES DE STOCK ===== */
+.stock-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.stock-badge.disponible {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.stock-badge.sin-stock {
+  background: var(--danger-bg);
+  color: var(--danger-text);
+}
+
+/* Si el stock está escrito con estilos en línea (texto verde/rojo plano) */
+[style*="color: green"],
+[style*="color:green"] {
+  align-self: flex-start;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  background: var(--success-bg);
+  color: var(--success-text) !important;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+[style*="color: red"],
+[style*="color:red"] {
+  align-self: flex-start;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  background: var(--danger-bg);
+  color: var(--danger-text) !important;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+/* ===== BOTONES ===== */
+button,
+.btn {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+  transition: transform 0.15s, box-shadow 0.2s, filter 0.2s;
+}
+
+button:hover,
+.btn:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+  box-shadow: 0 8px 18px rgba(99, 102, 241, 0.4);
+}
+
+button:active,
+.btn:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Botón "Salir" en la barra */
+header button,
+nav button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: none;
+  padding: 0.4rem 1rem;
+}
+
+header button:hover,
+nav button:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  box-shadow: none;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--ink);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+/* ===== FORMULARIOS ===== */
+form,
+.form-card {
+  max-width: 480px;
+  margin: 2rem auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.7rem 0.95rem;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--ink);
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  background: #fff;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+/* ===== TABLAS (por si las usás) ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+th {
+  text-align: left;
+  padding: 0.9rem 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  background: #f8fafc;
+}
+
+td {
+  padding: 0.9rem 1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  header,
+  nav {
+    flex-wrap: wrap;
+    padding: 0.8rem 1rem;
+  }
+
+  main,
+  .container {
+    padding: 1.5rem 1rem 3rem;
+  }
 }
